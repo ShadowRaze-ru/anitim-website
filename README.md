@@ -1,38 +1,53 @@
+# ANITIM — Corporate Website
 
+> 🏆 Победитель регионального конкурса **«Икар Код»** (Алтайский край)
 
-This template should help get you started developing with Vue 3 in Vite.
+Корпоративный сайт и сайт вакансий для АО «АНИТИМ»  
+(входит в группу машиностроительных заводов АЛМАЗ, г. Барнаул).
 
+Проект выполнен по техническому заданию предприятия  
+в рамках реального сотрудничества с организацией.
 
+## 🔗 Live Demo
+[anitim-9c1d1.web.app](https://anitim-9c1d1.web.app)
 
-[VS Code](https:
+## 🛠 Стек технологий
+- **Vue 3** — фреймворк
+- **Vuex 4** — глобальное состояние
+- **Vue Router 4** — навигация
+- **Firebase Firestore** — база данных + realtime обновления
+- **Firebase Hosting** — деплой
+- **Vite 7** — сборка проекта
+- **HH.ru API** — интеграция с биржей труда
 
+## ✨ Что реализовано
+- Главная страница с динамической статистикой из Firebase
+- Страница вакансий с фильтрацией по категориям (данные с HH.ru)
+- Контакты с Яндекс.Картой и ссылками на соцсети
+- Фотогалерея с lazy loading и lightbox
+- Виртуальный тур по заводу (RuTube embed)
+- **Админ-панель для сотрудников предприятия:**
+  - Управление галереей (добавление / редактирование / удаление)
+  - Редактирование контактов, статистики, ссылок на соцсети
+  - Аналитика посещаемости — графики за 30 дней, последние визиты
+  - Все изменения применяются в реальном времени (Firestore onSnapshot)
 
-
-- Chromium-based browsers (Chrome, Edge, Brave, etc.):
-  - [Vue.js devtools](https:
-  - [Turn on Custom Object Formatter in Chrome DevTools](http:
-- Firefox:
-  - [Vue.js devtools](https:
-  - [Turn on Custom Object Formatter in Firefox DevTools](https:
-
-
-
-See [Vite Configuration Reference](https:
-
-
-
-```sh
+## 🚀 Запуск локально
+\`\`\`sh
+git clone https://github.com/YOUR_USERNAME/anitim-website.git
+cd anitim-website
 npm install
-```
-
-
-
-```sh
+cp .env.example .env
+# заполни .env своими Firebase данными
 npm run dev
-```
+\`\`\`
 
+## 📦 Деплой
+\`\`\`sh
+npm run deploy
+\`\`\`
 
+---
 
-```sh
-npm run build
-```
+**Автор:** Юсупов Артур, 14 лет
+**Год:** 2026
