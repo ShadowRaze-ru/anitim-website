@@ -1,0 +1,35 @@
+{
+  "name": "anitim-website",
+  "version": "1.0.0",
+  "description": "Алтайский научно-исследовательский институт технологии машиностроения",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview",
+    "deploy": "npm run build && firebase deploy"
+  },
+  "dependencies": {
+    "axios": "^1.6.5",
+    "bootstrap-icons": "^1.11.3",
+    "firebase": "^10.14.1",
+    "vue": "^3.5.27",
+    "vue-router": "^4.6.4",
+    "vuex": "^4.0.2"
+  },
+  "devDependencies": {
+    "@vitejs/plugin-vue": "^6.0.3",
+    "vite": "^7.3.1",
+    "vite-plugin-vue-devtools": "^8.0.5"
+  },
+  "keywords": [
+    "НИИ",
+    "машиностроение",
+    "Барнаул",
+    "Алтай",
+    "наука"
+  ],
+  "author": "АНИТИМ",
+  "license": "MIT"
+}
