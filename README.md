@@ -33,21 +33,20 @@
   - Все изменения применяются в реальном времени (Firestore onSnapshot)
 
 ## 🚀 Запуск локально
-\`\`\`sh
+```sh
 git clone https://github.com/YOUR_USERNAME/anitim-website.git
 cd anitim-website
 npm install
 cp .env.example .env
-# заполни .env своими Firebase данными
 npm run dev
-\`\`\`
+```
 
 ## 📦 Деплой
-\`\`\`sh
+```sh
 npm run deploy
-\`\`\`
+```
 
 ---
 
-**Автор:** Юсупов Артур, 14 лет
+**Автор:** Юсупов Артур, 14 лет  
 **Год:** 2026
