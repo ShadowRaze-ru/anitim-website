@@ -384,8 +384,10 @@ import { mapGetters, mapActions } from 'vuex'
 import app from '../firebase/config.js'
 
 const db = getFirestore(app)
-const CREDS = { login: import.meta.env.ADMIN_PANEL_LOGIN, password: import.meta.env.ADMIN_PANEL_PASSWORD }
-
+const CREDS = { 
+  login: import.meta.env.VITE_ADMIN_PANEL_LOGIN, 
+  password: import.meta.env.VITE_ADMIN_PANEL_PASSWORD 
+}
 const defaultSets = () => ({
   phone: '8 800 700-50-08',
   email: 'info@anitim-oao.ru',
