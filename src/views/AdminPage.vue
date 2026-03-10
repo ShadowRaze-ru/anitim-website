@@ -17,7 +17,7 @@
             <label class="field-label">Логин</label>
             <div class="field-row">
               <i class="bi bi-person"></i>
-              <input v-model="form.login" type="text" placeholder="admin" @keyup.enter="doLogin" />
+              <input v-model="form.login" type="text" placeholder="login" @keyup.enter="doLogin" />
             </div>
           </div>
           <div class="field-group">
