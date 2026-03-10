@@ -154,7 +154,7 @@ export default {
   async mounted() {
     this.subscribeSettings()
 
-    if (this.$route.path !== '/admin') {
+    if (!this.$route.path.startsWith('/admin')) {
       this.trackVisit()
     }
 
@@ -197,9 +197,11 @@ export default {
   flex-direction: column;
   min-height: 100vh;
 }
+
 #app:has(.admin-root) .header {
   height: 7vh;
 }
+
 .main-content {
   flex: 1;
 }

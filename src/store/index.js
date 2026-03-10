@@ -115,12 +115,14 @@ const store = createStore({
 
     async trackVisit() {
       try {
-        const sessionKey = 'anitim_visited'
-        if (sessionStorage.getItem(sessionKey)) return
-        sessionStorage.setItem(sessionKey, '1')
-
         const now = new Date()
         const todayStr = now.toISOString().split('T')[0]
+        const storageKey = 'anitim_last_visit'
+
+        const lastVisit = localStorage.getItem(storageKey)
+        if (lastVisit === todayStr) return
+
+        localStorage.setItem(storageKey, todayStr)
 
         const globalRef = doc(db, 'analytics', 'global')
         await setDoc(globalRef, {
@@ -218,14 +220,14 @@ const store = createStore({
   },
 
   getters: {
-    siteInfo:         state => state.siteInfo,
-    settings:         state => state.settings,
-    settingsLoaded:   state => state.settingsLoaded,
-    vacancies:        state => state.vacancies,
+    siteInfo: state => state.siteInfo,
+    settings: state => state.settings,
+    settingsLoaded: state => state.settingsLoaded,
+    vacancies: state => state.vacancies,
     vacanciesLoading: state => state.vacanciesLoading,
-    visitorStats:     state => state.visitorStats,
-    recentVisits:     state => state.recentVisits,
-    analyticsLoaded:  state => state.analyticsLoaded,
+    visitorStats: state => state.visitorStats,
+    recentVisits: state => state.recentVisits,
+    analyticsLoaded: state => state.analyticsLoaded,
   }
 })
 
