@@ -37,12 +37,15 @@ const store = createStore({
     settingsLoaded: false,
     settingsUnsubscribe: null,
 
+    // Gallery
     gallery: [],
     galLoading: true,
     galUnsubscribe: null,
 
+    // Vacancies
     vacancies: [],
     vacanciesLoading: false,
+    vacanciesError: false,
 
     visitorStats: {
       total: 0,
@@ -60,6 +63,9 @@ const store = createStore({
     },
     SET_VACANCIES_LOADING(state, val) {
       state.vacanciesLoading = val
+    },
+    SET_VACANCIES_ERROR(state, val) {
+      state.vacanciesError = val
     },
     SET_SETTINGS(state, data) {
       state.settings = { ...defaultSettings(), ...data }
@@ -82,6 +88,7 @@ const store = createStore({
       state.analyticsLoaded = val
     },
 
+    // Gallery mutations
     SET_GALLERY(state, data) {
       state.gallery = data
     },
@@ -111,6 +118,7 @@ const store = createStore({
       }
     },
 
+    // Gallery actions
     subscribeGallery({ commit, state }) {
       if (state.galUnsubscribe) return
       const q = query(collection(db, 'gallery'), orderBy('order', 'asc'))
@@ -137,6 +145,7 @@ const store = createStore({
     async fetchVacancies({ commit, state }) {
       if (state.vacancies.length > 0) return
       commit('SET_VACANCIES_LOADING', true)
+      commit('SET_VACANCIES_ERROR', false)
       try {
         const response = await axios.get(
           'https://api.hh.ru/vacancies?employer_id=2529692&per_page=100'
@@ -145,9 +154,16 @@ const store = createStore({
       } catch (error) {
         console.error('Ошибка загрузки вакансий с HH:', error)
         commit('SET_VACANCIES', [])
+        commit('SET_VACANCIES_ERROR', true)
       } finally {
         commit('SET_VACANCIES_LOADING', false)
       }
+    },
+
+    async retryVacancies({ commit, dispatch }) {
+      commit('SET_VACANCIES', [])
+      commit('SET_VACANCIES_ERROR', false)
+      await dispatch('fetchVacancies')
     },
 
     async trackVisit() {
@@ -262,10 +278,12 @@ const store = createStore({
     settingsLoaded: state => state.settingsLoaded,
     vacancies: state => state.vacancies,
     vacanciesLoading: state => state.vacanciesLoading,
+    vacanciesError: state => state.vacanciesError,
     visitorStats: state => state.visitorStats,
     recentVisits: state => state.recentVisits,
     analyticsLoaded: state => state.analyticsLoaded,
 
+    // Gallery getters
     gallery: state => state.gallery,
     galLoading: state => state.galLoading,
   }
