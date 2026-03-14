@@ -37,6 +37,10 @@ const store = createStore({
     settingsLoaded: false,
     settingsUnsubscribe: null,
 
+    gallery: [],
+    galLoading: true,
+    galUnsubscribe: null,
+
     vacancies: [],
     vacanciesLoading: false,
 
@@ -76,7 +80,17 @@ const store = createStore({
     },
     SET_ANALYTICS_LOADED(state, val) {
       state.analyticsLoaded = val
-    }
+    },
+
+    SET_GALLERY(state, data) {
+      state.gallery = data
+    },
+    SET_GAL_LOADING(state, val) {
+      state.galLoading = val
+    },
+    SET_GAL_UNSUBSCRIBE(state, fn) {
+      state.galUnsubscribe = fn
+    },
   },
 
   actions: {
@@ -94,6 +108,29 @@ const store = createStore({
       if (state.settingsUnsubscribe) {
         state.settingsUnsubscribe()
         commit('SET_SETTINGS_UNSUBSCRIBE', null)
+      }
+    },
+
+    subscribeGallery({ commit, state }) {
+      if (state.galUnsubscribe) return
+      const q = query(collection(db, 'gallery'), orderBy('order', 'asc'))
+      const unsub = onSnapshot(
+        q,
+        snap => {
+          commit('SET_GALLERY', snap.docs.map(d => ({ id: d.id, ...d.data() })))
+          commit('SET_GAL_LOADING', false)
+        },
+        () => {
+          commit('SET_GAL_LOADING', false)
+        }
+      )
+      commit('SET_GAL_UNSUBSCRIBE', unsub)
+    },
+
+    unsubscribeGallery({ state, commit }) {
+      if (state.galUnsubscribe) {
+        state.galUnsubscribe()
+        commit('SET_GAL_UNSUBSCRIBE', null)
       }
     },
 
@@ -228,6 +265,9 @@ const store = createStore({
     visitorStats: state => state.visitorStats,
     recentVisits: state => state.recentVisits,
     analyticsLoaded: state => state.analyticsLoaded,
+
+    gallery: state => state.gallery,
+    galLoading: state => state.galLoading,
   }
 })
 
