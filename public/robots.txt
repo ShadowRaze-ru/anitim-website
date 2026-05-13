@@ -1,0 +1,11 @@
+User-agent: *
+Allow: /
+Disallow: /admin
+
+Sitemap: https://anitim-9c1d1.web.app/sitemap.xml
+
+# Яндекс
+User-agent: Yandex
+Allow: /
+Disallow: /admin
+Host: anitim-9c1d1.web.app
